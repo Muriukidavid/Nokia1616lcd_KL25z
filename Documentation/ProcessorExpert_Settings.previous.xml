@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PE_PROJECT_SETTINGS_DOCUMENTATION>
-  <PE_product_version v="version 10.2 for Freescale Microcontrollers" />
-  <PE_core_version v="Processor Expert Version 0506" />
+  <PE_product_version v="version 10.3 for Freescale Microcontrollers" />
+  <PE_core_version v="Processor Expert Version 0508" />
   <CPU_Bean name="Cpu" type="MKL25Z128LK4">
     <Enabled v="Y" />
     <Properties>
@@ -62,7 +62,7 @@
                 <group name="FLL settings">
                   <FLL_module v="Enabled" />
                   <FLL_output__MHz_ v="20.971520000000" />
-                  <MCGFFCLK_clock__kHz_ v="16.384000000000" />
+                  <MCGFFCLK_clock__kHz_ v="32.768000000000" />
                   <enumgroup name="Reference clock source" v="Slow internal clock">
                     <EmptySection_DummyValue />
                   </enumgroup>
@@ -117,7 +117,7 @@
         <list name="Shared Flash Config settings" v="1">
           <boolgroup name="Flash configuration field" v="Enabled">
             <group name="Security settings">
-              <Flash_security v="Disabled" />
+              <boolgroup name="Flash security" v="Disabled" />
               <Freescale_failure_analysis_access v="Enabled" />
               <Mass_erase v="Enabled" />
               <Backdoor_key_security v="Disabled" />
@@ -248,7 +248,7 @@
             <MCGIRCLK_clock__MHz_ v="0.032768" />
             <OSCERCLK_clock__MHz_ v="8" />
             <ERCLK32K__clock__MHz_ v="0.001" />
-            <MCGFFCLK__kHz_ v="16.384" />
+            <MCGFFCLK__kHz_ v="32.768" />
           </enumgroup>
           <group name="System clocks">
             <Core_clock_prescaler v="Auto select" />
@@ -273,9 +273,11 @@
         <EnableInt v="don&amp;apos;t generate code" />
         <DisableInt v="don&amp;apos;t generate code" />
         <GetLLSWakeUpFlags v="don&amp;apos;t generate code" />
+        <OpenBackDoor v="don&amp;apos;t generate code" />
         <MCGAutoTrim v="don&amp;apos;t generate code" />
         <VLPModeEnable v="don&amp;apos;t generate code" />
         <VLPModeDisable v="don&amp;apos;t generate code" />
+        <SystemReset v="don&amp;apos;t generate code" />
       </list>
     </Methods>
     <Events>
@@ -374,7 +376,7 @@ PE_DEBUGHALT();
           <group name="Initialization">
             <Init__direction v="Output" />
             <Init__value v="0" />
-            <Auto_Initialization v="yes" />
+            <Auto_initialization v="yes" />
           </group>
           <Safe_mode v="yes" />
         </Properties>
@@ -439,7 +441,7 @@ PE_DEBUGHALT();
           <group name="Initialization">
             <Init__direction v="Output" />
             <Init__value v="0" />
-            <Auto_Initialization v="yes" />
+            <Auto_initialization v="yes" />
           </group>
           <Safe_mode v="yes" />
         </Properties>
@@ -504,7 +506,7 @@ PE_DEBUGHALT();
           <group name="Initialization">
             <Init__direction v="Output" />
             <Init__value v="0" />
-            <Auto_Initialization v="yes" />
+            <Auto_initialization v="yes" />
           </group>
           <Safe_mode v="yes" />
         </Properties>
@@ -569,7 +571,7 @@ PE_DEBUGHALT();
           <group name="Initialization">
             <Init__direction v="Output" />
             <Init__value v="0" />
-            <Auto_Initialization v="yes" />
+            <Auto_initialization v="yes" />
           </group>
           <Safe_mode v="yes" />
         </Properties>
@@ -635,6 +637,69 @@ PE_DEBUGHALT();
       <Waitus v="generate code" />
       <Waitns v="generate code" />
       <WaitOSms v="generate code" />
+    </Methods>
+    <Events>
+      <EmptySection_DummyValue />
+    </Events>
+  </Bean>
+  <Bean name="UTIL1" type="Utility">
+    <Enabled v="Y" />
+    <Properties>
+      <Component_name v="UTIL1" />
+    </Properties>
+    <Methods>
+      <strcpy v="generate code" />
+      <strcat v="generate code" />
+      <chcat v="generate code" />
+      <Num8sToStr v="generate code" />
+      <Num8uToStr v="generate code" />
+      <Num16sToStr v="generate code" />
+      <Num16uToStr v="generate code" />
+      <Num32uToStr v="generate code" />
+      <Num32sToStr v="generate code" />
+      <Num16sToStrFormatted v="generate code" />
+      <Num16uToStrFormatted v="generate code" />
+      <Num32uToStrFormatted v="generate code" />
+      <Num32sToStrFormatted v="generate code" />
+      <strcatNum8u v="generate code" />
+      <strcatNum8s v="generate code" />
+      <strcatNum16u v="generate code" />
+      <strcatNum16s v="generate code" />
+      <strcatNum32u v="generate code" />
+      <strcatNum32s v="generate code" />
+      <strcatNum16uFormatted v="generate code" />
+      <strcatNum16sFormatted v="generate code" />
+      <strcatNum32uFormatted v="generate code" />
+      <strcatNum32sFormatted v="generate code" />
+      <strcatNum8Hex v="generate code" />
+      <strcatNum16Hex v="generate code" />
+      <strcatNum24Hex v="generate code" />
+      <strcatNum32Hex v="generate code" />
+      <strcatNum32sDotValue100 v="generate code" />
+      <IsLeapYear v="generate code" />
+      <WeekDay v="generate code" />
+      <ReadEscapedName v="generate code" />
+      <xatoi v="generate code" />
+      <ScanDate v="generate code" />
+      <ScanTime v="generate code" />
+      <ScanDecimal8uNumber v="generate code" />
+      <ScanDecimal8sNumber v="generate code" />
+      <ScanDecimal16uNumber v="generate code" />
+      <ScanDecimal16sNumber v="generate code" />
+      <ScanDecimal32uNumber v="generate code" />
+      <ScanDecimal32sNumber v="generate code" />
+      <ScanHex8uNumber v="generate code" />
+      <ScanHex8uNumberNoPrefix v="generate code" />
+      <ScanHex16uNumber v="generate code" />
+      <ScanHex32uNumber v="generate code" />
+      <ScanSeparatedNumbers v="generate code" />
+      <ScanDoubleQuotedString v="generate code" />
+      <strcmp v="generate code" />
+      <strncmp v="generate code" />
+      <strFind v="generate code" />
+      <strtailcmp v="generate code" />
+      <strlen v="generate code" />
+      <strCutTail v="generate code" />
     </Methods>
     <Events>
       <EmptySection_DummyValue />

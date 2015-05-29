@@ -7,6 +7,7 @@
 
 #ifndef NOKIA_1616_LCD_H_
 #define NOKIA_1616_LCD_H_
+#include "PE_Types.h"
 //get defined font lookup and colors
 #include "font.h"
 #include "colors.h"
@@ -14,10 +15,19 @@
 //colormode and background color
 enum colormodes {twelve=0,sixteen,eighteen};
 #define COLORMODE sixteen //16 bit color-mode, 1 pixel 2 bytes
-#define Background White
+#define Background White // a white background
+#define Foreground Black // a black foreground
 
-// a buffer for itoa
-char LCDBuffer[20];
+#define width 128 //width of LCD in pixels
+#define height 160 //height of LCD in pixels
+#define rows 15 //height of display in in characters
+#define cols 22 //width of display in characters
+
+uint8_t blanks[cols] = "                     "; //blank row for clearing buffer
+uint8_t buffer[rows][cols]={}; //a buffer for display
+uint8_t LCDBuffer[20]; // a buffer for itoa
+int buffer_ptr=0; //a buffer fro display pointer
+int selected=0; //the currently selected line
 
 //function prototypes
 void itoa(int n);
@@ -26,25 +36,68 @@ void lcd_reset(void);
 void lcd_clear(Color clr);
 void lcd_invert(char on_off);
 void lcd_scroll(void);
-void lcd_sendchar(char ch, char X, char Y, Color clr);
-void lcd_printstr(char *str, char X, char Y, Color clr);
-void lcd_printint(int Value, char X, char Y, Color clr);
+void lcd_sendchar(char c, char X, char Y, Color foreground, Color background);
+void lcd_printstr(uint8_t *str, char X, char Y, Color foreground, Color background);
+void lcd_printint(int value, char x, char y, Color foreground, Color background);
 void lcd_sendcmd(char cmd);
 void lcd_senddata(char data);
 void lcd_send(char byte, char comdata);
 void lcd_setwin(char x, char y, char w, char h);
 void lcd_sendpixel(Color color);
 void lcd_delayms(unsigned int ms);
+void add2display(unsigned char *str, int offset);
+void display(void);
+void resetBuffer(void);
+void select();
+
 //functions implementations
+void select(int y){
+	lcd_setwin(0,y,width,8);
+	int i;
+	for(i=0; i<width*8; i++){
+		lcd_sendpixel(Foreground);
+	}
+}
+
+void add2display(unsigned char *str, int offset){
+	UTIL1_strcpy(buffer[buffer_ptr+offset],cols,str);
+	buffer_ptr++;
+	if(buffer_ptr>15){
+			buffer_ptr=0;
+		}
+}
+
+void display(void){
+	int x=0;
+	int y=1;
+	while(x<rows){
+		if((selected*8+1)==y){
+			lcd_printstr(buffer[x], 1, y, Background,Foreground);
+		}else{
+			lcd_printstr(buffer[x], 1, y, Foreground,Background);
+		}
+		y+=8;
+		x++;
+	}
+}
+
+void resetBuffer(void){
+	int x= 0;
+	while(x<rows){
+		buffer[x][0]='\0';
+		x++;
+	}
+	buffer_ptr = 0;
+}
 
 /*
 ** ===================================================================
 **     Method      :  itoa(int n)
 **     Description :
-**         Format an integer to a string in a buffer.
+**         Format the output into a buffer (16bit data type).
 **     Parameters  :
 **         NAME            - DESCRIPTION
-**         n          	   - The integer to be converted.
+**         n          	   - The number to be output to screen.
 **     Returns     : Nothing
 ** ===================================================================
 */
@@ -78,12 +131,12 @@ void itoa(int n){
 
 /*
 ** ===================================================================
-**     Method      :  lcd_init(Color clr)
+**     Method      :  itoa(int n)
 **     Description :
 **         initialize the lcd.
 **     Parameters  :
 **         NAME            - DESCRIPTION
-**         clr               A color to paint the background in at the end of initialization
+**         none            -
 **     Returns     : Nothing
 ** ===================================================================
 */
@@ -112,17 +165,7 @@ void lcd_init(Color clr){
 	lcd_clear(clr);
 }
 
-/*
-** ===================================================================
-**     Method      :  lcd_reset(void)
-**     Description :
-**         Hard reset the LCD and initialize GPIO pins
-**     Parameters  :
-**         NAME            - DESCRIPTION
-**         none            -
-**     Returns     : Nothing
-** ===================================================================
-*/
+//reset the display and init gpio
 void lcd_reset(void){
 	CS_ClrVal();
 	RESET_ClrVal();
@@ -134,54 +177,21 @@ void lcd_reset(void){
 	SCK_SetVal();
 }
 
-/*
-** ===================================================================
-**     Method      :  lcd_delayms(unsigned int ms)
-**     Description :
-**         Wait for the LCD to perform a task
-**     Parameters  :
-**         NAME            - DESCRIPTION
-**         ms              - Number of milliseconds to wait
-**     Returns     : Nothing
-** ===================================================================
-*/
 void lcd_delayms(unsigned int ms){
 	WAIT1_Waitms(ms);
 }
 
-/*
-** ===================================================================
-**     Method      :  lcd_clear(Color clr)
-**     Description :
-**         Paint the whole LCD with a background color
-**     Parameters  :
-**         NAME            - DESCRIPTION
-**         clr             - A background color to be used to paint the background
-**     Returns     : Nothing
-** ===================================================================
-*/
 void lcd_clear(Color clr){
-	lcd_setwin(0,0,128,160);
+	lcd_setwin(0,0,width,height);
 	int i;
-	for(i=0; i<128*160; i++){
+	for(i=0; i<width*height; i++){
 		lcd_sendpixel(clr);
 	}
 }
 
-
 /*
-** ===================================================================
-**     Method      :  lcd_setwin(char x, char y, char w, char h)
-**     Description :
-**         Set bounds of a window to write inside.
-**     Parameters  :
-**         NAME            - DESCRIPTION
-**         x               - left corner x is (2+x)
-**         y			   - left corner y is (1+y)
-**         w			   - right corner x is (2+x+w-1)
-**         h               - right corner y is (1+y+h)
-**     Returns     : Nothing
-** ===================================================================
+ * To set the window, you need to pass two points that
+ * define the rectangle: (x1, y1), (x1, y2)
 */
 void lcd_setwin(char x, char y, char w, char h){
 	//choosing a range of columns
@@ -196,21 +206,11 @@ void lcd_setwin(char x, char y, char w, char h){
 	lcd_senddata(1+y);		  	// Left corner - y
 	lcd_senddata(0);
 	lcd_senddata(1+y+h);		// Right angle - y
-	//lcd_sendcmd(0x20);		// RAMWR command ?? where from?
+
 	lcd_sendcmd(0x2C);  		//RAMWR (2Ch): Memory Write
 }
 
-/*
-** ===================================================================
-**     Method      :  lcd_invert(char on_off)
-**     Description :
-**         Invert the LCD background color bright/dark
-**     Parameters  :
-**         NAME            - DESCRIPTION
-**         on_off          - Inversion status, whether the inversion to be on or off
-**     Returns     : Nothing
-** ===================================================================
-*/
+//invert the background/forground
 void lcd_invert(char on_off){
 	if(!on_off){
 		lcd_sendcmd(0x20); //INVOFF (20h): Display Inversion Off
@@ -220,23 +220,12 @@ void lcd_invert(char on_off){
 	}
 }
 
-//to be implemented
+//TODO: implement LCD scrolling. No immediate use
 void lcd_scroll(void){
 	//lcd_sendcmd(0x37);  //VSCSAD (37h): Vertical Scroll Start Address of RAM
 	//lcd_senddata(0x00); //SSA = 0, 1, 2, ..., 161
 }
 
-/*
-** ===================================================================
-**     Method      :  lcd_sendpixel(Color color)
-**     Description :
-**         Transmit color data for a single pixel
-**     Parameters  :
-**         NAME            - DESCRIPTION
-**         color           - The foreground color
-**     Returns     : Nothing
-** ===================================================================
-*/
 void lcd_sendpixel(Color color){
 	if(COLORMODE==sixteen){
 		lcd_senddata((color.r << 3) | (color.g >> 5));
@@ -250,116 +239,43 @@ void lcd_sendpixel(Color color){
 	}
 }
 
-/*
-** ===================================================================
-**     Method      :  lcd_sendchar(char c, char X, char Y, Color clr)
-**     Description :
-**         Transmit color data for a single character, pixel by pixel
-**     Parameters  :
-**         NAME            - DESCRIPTION
-**         c               - The character
-**         X               - start column
-**         Y               - start row
-**         clr             - The foreground color
-**     Returns     : Nothing
-** ===================================================================
-*/
-void lcd_sendchar(char c, char X, char Y, Color clr){
+
+void lcd_sendchar(char c, char X, char Y, Color foreground, Color background){
 	unsigned char i,j;
 	lcd_setwin(X, Y, 6, 8);			//define the box to paint pixels in
 	for(j=0; j<8; j++)				// for al the rows
 	{
 		for(i=0; i<5; i++)			//for all the columns
 			if( font_lookup[c-32][i] & (1 << j) )	// pixel is on,
-				lcd_sendpixel(clr);					// fill it with foreground
+				lcd_sendpixel(foreground);					// fill it with foreground
 			else                              		// pixel is off
-				lcd_sendpixel(Background);			// pad with a background
-		lcd_sendpixel(Background);					// pad with a space(Background)
+				lcd_sendpixel(background);			// pad with a background
+		lcd_sendpixel(background);					// pad with a space(Background)
 	}
 }
 
-/*
-** ===================================================================
-**     Method      :  lcd_printstr(char* str, char X, char Y, Color clr)
-**     Description :
-**         Print a string, character by character
-**     Parameters  :
-**         NAME            - DESCRIPTION
-**         str             - The pointer to the start of the string
-**         X               - start column
-**         Y               - start row
-**         clr             - The foreground color
-**     Returns     : Nothing
-** ===================================================================
-*/
-void lcd_printstr(char* str, char X, char Y, Color clr){
+void lcd_printstr(uint8_t *str, char X, char Y, Color foreground, Color background){
 	unsigned char i = 0;
 	while( str[i] != 0){
-		lcd_sendchar( (unsigned char)str[i] , X+i*6, Y, clr);
+		lcd_sendchar( (unsigned char)str[i] , X+i*6, Y, foreground, background);
 		i++;
 	}
 }
 
-/*
-** ===================================================================
-**     Method      :  lcd_printstr(char* str, char X, char Y, Color clr)
-**     Description :
-**         Print a string, character by character
-**     Parameters  :
-**         NAME            - DESCRIPTION
-**         value           - The integer to be printed
-**         x               - start column
-**         y               - start row
-**         clr             - The foreground color
-**     Returns     : Nothing
-** ===================================================================
-*/
-void lcd_printint(int value, char x, char y, Color clr){
+void lcd_printint(int value, char x, char y, Color foreground, Color background){
   itoa(value);
-  lcd_printstr(LCDBuffer, x, y, clr);
+  lcd_printstr(LCDBuffer, x, y, foreground ,background);
 }
 
-/*
-** ===================================================================
-**     Method      :  lcd_sendcmd(char cmd)
-**     Description :
-**         Send a command to the LCD controller
-**     Parameters  :
-**         NAME            - DESCRIPTION
-**         cmd         	   - The command to send.
-**     Returns     : Nothing
-** ===================================================================
-*/
 void lcd_sendcmd(char cmd){
 	lcd_send(cmd,0);
 }
 
-/*
-** ===================================================================
-**     Method      :  lcd_senddata(char data)
-**     Description :
-**         Send a byte of data to the LCD controller
-**     Parameters  :
-**         NAME            - DESCRIPTION
-**         cmd         	   - The byte of data to send.
-**     Returns     : Nothing
-** ===================================================================
-*/
 void lcd_senddata(char data){
 	lcd_send(data,0x01);
 }
 
-/*
-** ===================================================================
-**     Method      :  lcd_send(char byte, char comdata)
-**     Description :
-**         Send a command or data byte to the LCD controller using 3-wire 9 bit bit-banging SPI
-**     Parameters  :
-**         NAME            - DESCRIPTION
-**         comdata         - The command or data byte to send.
-**     Returns     : Nothing
-** ===================================================================
-*/
+// 3-wire 9 bit bit-banging SPI write
 void lcd_send(char byte, char comdata){
 	char i;
 	//Hold CS low to enable write
@@ -387,6 +303,10 @@ void lcd_send(char byte, char comdata){
 	}
 	//disable write
 	CS_SetVal();
+}
+
+void lcd_delay(char ms){
+	WAIT1_Waitms(ms);
 }
 
 #endif /* 1616_LCD_H_ */

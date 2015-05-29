@@ -44,6 +44,7 @@
 #include "SCK.h"
 #include "BitIoLdd4.h"
 #include "WAIT1.h"
+#include "UTIL1.h"
 
 #ifdef __cplusplus
 extern "C" {

@@ -40,6 +40,7 @@
 #include "SCK.h"
 #include "BitIoLdd4.h"
 #include "WAIT1.h"
+#include "UTIL1.h"
 /* Including shared modules, which are used for whole project */
 #include "PE_Types.h"
 #include "PE_Error.h"
@@ -61,24 +62,17 @@ enum logics{false, true};
 
   /* Write your code here */
   lcd_init(Background);
-  lcd_printstr("University of Nairobi", 2, 10, Blue);
-  lcd_printstr("Physics Department", 10, 30, Red);
-  lcd_printstr("David Muriuki K.", 20, 50, White);
-  lcd_printstr("http://karibe.co.ke", 8, 70, Blue);
-  lcd_printstr("Embedded ARM Dev't  ", 8, 90, Crimson);
-  lcd_delayms(3000);
+  add2display((unsigned char *)"University of Nairobi",0);
+  add2display((unsigned char *)" Physics Department  ",0);
+  add2display((unsigned char *)" another string for  ",0);
+  add2display((unsigned char *)" another string menu ",0);
+  selected=0;
   while(1){
-	  lcd_invert(true);
-	  lcd_printstr("C, C++, SystemC     ", 8, 90, Yellow);
-	  lcd_delayms(1000);
-	  lcd_printstr("Freescale(TM), Nokia", 8, 90, Purple);
-	  lcd_delayms(1000);
-	  lcd_invert(false);
-	  lcd_delayms(50);
-	  lcd_invert(true);
-	  lcd_delayms(100);
-	  lcd_invert(false);
-	  lcd_delayms(50);
+	  if(selected>3)
+		  selected=0;
+	  display();
+	  WAIT1_Waitms(1000);
+	  selected++;
   }
 
   /*** Don't write any code pass this line, or it will be deleted during code generation. ***/

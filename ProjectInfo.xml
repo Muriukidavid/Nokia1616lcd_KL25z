@@ -35,60 +35,62 @@
     <FLASHsize>128k</FLASHsize>
   </PROCESSOR>
   <PATHS>
-    <LinkerCommandFile>/home/simlab/src/git/freescale/Nokia1616_lcd/Project_Settings/Linker_Files/ProcessorExpert.ld</LinkerCommandFile>
+    <LinkerCommandFile>/home/karibe/workspace_kepler/Nokia1616_lcd/Project_Settings/Linker_Files/ProcessorExpert.ld</LinkerCommandFile>
     <IncludePaths>
-      <Path>/home/simlab/eclipse/ProcessorExpert/lib/Kinetis/iofiles/</Path>
-      <Path>/home/simlab/eclipse/ProcessorExpert/lib/Kinetis/pdd/inc/</Path>
-      <Path>/home/simlab/src/git/freescale/Nokia1616_lcd/Sources/</Path>
-      <Path>/home/simlab/src/git/freescale/Nokia1616_lcd/Generated_Code/</Path>
+      <Path>/home/karibe/Documents/eclipse/ProcessorExpert/lib/Kinetis/iofiles/</Path>
+      <Path>/home/karibe/Documents/eclipse/ProcessorExpert/lib/Kinetis/pdd/inc/</Path>
+      <Path>/home/karibe/workspace_kepler/Nokia1616_lcd/Sources/</Path>
+      <Path>/home/karibe/workspace_kepler/Nokia1616_lcd/Generated_Code/</Path>
     </IncludePaths>
     <SourceCodePaths>
-      <Path>/home/simlab/src/git/freescale/Nokia1616_lcd/Generated_Code/</Path>
-      <Path>/home/simlab/src/git/freescale/Nokia1616_lcd/Project_Settings/Startup_Code/</Path>
-      <Path>/home/simlab/src/git/freescale/Nokia1616_lcd/Sources/</Path>
+      <Path>/home/karibe/workspace_kepler/Nokia1616_lcd/Generated_Code/</Path>
+      <Path>/home/karibe/workspace_kepler/Nokia1616_lcd/Project_Settings/Startup_Code/</Path>
+      <Path>/home/karibe/workspace_kepler/Nokia1616_lcd/Sources/</Path>
     </SourceCodePaths>
   </PATHS>
   <FILES>
     <GeneratedCs>
-      <PathName>/home/simlab/src/git/freescale/Nokia1616_lcd/Generated_Code/BitIoLdd1.c</PathName>
-      <PathName>/home/simlab/src/git/freescale/Nokia1616_lcd/Generated_Code/BitIoLdd2.c</PathName>
-      <PathName>/home/simlab/src/git/freescale/Nokia1616_lcd/Generated_Code/BitIoLdd3.c</PathName>
-      <PathName>/home/simlab/src/git/freescale/Nokia1616_lcd/Generated_Code/BitIoLdd4.c</PathName>
-      <PathName>/home/simlab/src/git/freescale/Nokia1616_lcd/Generated_Code/CS.c</PathName>
-      <PathName>/home/simlab/src/git/freescale/Nokia1616_lcd/Generated_Code/Cpu.c</PathName>
-      <PathName>/home/simlab/src/git/freescale/Nokia1616_lcd/Generated_Code/MOSI.c</PathName>
-      <PathName>/home/simlab/src/git/freescale/Nokia1616_lcd/Generated_Code/PE_LDD.c</PathName>
-      <PathName>/home/simlab/src/git/freescale/Nokia1616_lcd/Generated_Code/RESET.c</PathName>
-      <PathName>/home/simlab/src/git/freescale/Nokia1616_lcd/Generated_Code/SCK.c</PathName>
-      <PathName>/home/simlab/src/git/freescale/Nokia1616_lcd/Generated_Code/Vectors.c</PathName>
-      <PathName>/home/simlab/src/git/freescale/Nokia1616_lcd/Generated_Code/WAIT1.c</PathName>
-      <PathName>/home/simlab/src/git/freescale/Nokia1616_lcd/Project_Settings/Startup_Code/startup.c</PathName>
-      <PathName>/home/simlab/src/git/freescale/Nokia1616_lcd/Sources/Events.c</PathName>
-      <PathName>/home/simlab/src/git/freescale/Nokia1616_lcd/Sources/ProcessorExpert.c</PathName>
+      <PathName>/home/karibe/workspace_kepler/Nokia1616_lcd/Generated_Code/BitIoLdd1.c</PathName>
+      <PathName>/home/karibe/workspace_kepler/Nokia1616_lcd/Generated_Code/BitIoLdd2.c</PathName>
+      <PathName>/home/karibe/workspace_kepler/Nokia1616_lcd/Generated_Code/BitIoLdd3.c</PathName>
+      <PathName>/home/karibe/workspace_kepler/Nokia1616_lcd/Generated_Code/BitIoLdd4.c</PathName>
+      <PathName>/home/karibe/workspace_kepler/Nokia1616_lcd/Generated_Code/CS.c</PathName>
+      <PathName>/home/karibe/workspace_kepler/Nokia1616_lcd/Generated_Code/Cpu.c</PathName>
+      <PathName>/home/karibe/workspace_kepler/Nokia1616_lcd/Generated_Code/MOSI.c</PathName>
+      <PathName>/home/karibe/workspace_kepler/Nokia1616_lcd/Generated_Code/PE_LDD.c</PathName>
+      <PathName>/home/karibe/workspace_kepler/Nokia1616_lcd/Generated_Code/RESET.c</PathName>
+      <PathName>/home/karibe/workspace_kepler/Nokia1616_lcd/Generated_Code/SCK.c</PathName>
+      <PathName>/home/karibe/workspace_kepler/Nokia1616_lcd/Generated_Code/UTIL1.c</PathName>
+      <PathName>/home/karibe/workspace_kepler/Nokia1616_lcd/Generated_Code/Vectors.c</PathName>
+      <PathName>/home/karibe/workspace_kepler/Nokia1616_lcd/Generated_Code/WAIT1.c</PathName>
+      <PathName>/home/karibe/workspace_kepler/Nokia1616_lcd/Project_Settings/Startup_Code/startup.c</PathName>
+      <PathName>/home/karibe/workspace_kepler/Nokia1616_lcd/Sources/Events.c</PathName>
+      <PathName>/home/karibe/workspace_kepler/Nokia1616_lcd/Sources/ProcessorExpert.c</PathName>
     </GeneratedCs>
     <GeneratedHs>
-      <PathName>/home/simlab/src/git/freescale/Nokia1616_lcd/Generated_Code/BitIoLdd1.h</PathName>
-      <PathName>/home/simlab/src/git/freescale/Nokia1616_lcd/Generated_Code/BitIoLdd2.h</PathName>
-      <PathName>/home/simlab/src/git/freescale/Nokia1616_lcd/Generated_Code/BitIoLdd3.h</PathName>
-      <PathName>/home/simlab/src/git/freescale/Nokia1616_lcd/Generated_Code/BitIoLdd4.h</PathName>
-      <PathName>/home/simlab/src/git/freescale/Nokia1616_lcd/Generated_Code/CS.h</PathName>
-      <PathName>/home/simlab/src/git/freescale/Nokia1616_lcd/Generated_Code/Cpu.h</PathName>
-      <PathName>/home/simlab/src/git/freescale/Nokia1616_lcd/Generated_Code/IO_Map.h</PathName>
-      <PathName>/home/simlab/src/git/freescale/Nokia1616_lcd/Generated_Code/MOSI.h</PathName>
-      <PathName>/home/simlab/src/git/freescale/Nokia1616_lcd/Generated_Code/PE_Const.h</PathName>
-      <PathName>/home/simlab/src/git/freescale/Nokia1616_lcd/Generated_Code/PE_Error.h</PathName>
-      <PathName>/home/simlab/src/git/freescale/Nokia1616_lcd/Generated_Code/PE_LDD.h</PathName>
-      <PathName>/home/simlab/src/git/freescale/Nokia1616_lcd/Generated_Code/PE_Types.h</PathName>
-      <PathName>/home/simlab/src/git/freescale/Nokia1616_lcd/Generated_Code/RESET.h</PathName>
-      <PathName>/home/simlab/src/git/freescale/Nokia1616_lcd/Generated_Code/SCK.h</PathName>
-      <PathName>/home/simlab/src/git/freescale/Nokia1616_lcd/Generated_Code/WAIT1.h</PathName>
-      <PathName>/home/simlab/src/git/freescale/Nokia1616_lcd/Sources/1616_lcd.h</PathName>
-      <PathName>/home/simlab/src/git/freescale/Nokia1616_lcd/Sources/Events.h</PathName>
-      <PathName>/home/simlab/src/git/freescale/Nokia1616_lcd/Sources/colors.h</PathName>
-      <PathName>/home/simlab/src/git/freescale/Nokia1616_lcd/Sources/font.h</PathName>
+      <PathName>/home/karibe/workspace_kepler/Nokia1616_lcd/Generated_Code/BitIoLdd1.h</PathName>
+      <PathName>/home/karibe/workspace_kepler/Nokia1616_lcd/Generated_Code/BitIoLdd2.h</PathName>
+      <PathName>/home/karibe/workspace_kepler/Nokia1616_lcd/Generated_Code/BitIoLdd3.h</PathName>
+      <PathName>/home/karibe/workspace_kepler/Nokia1616_lcd/Generated_Code/BitIoLdd4.h</PathName>
+      <PathName>/home/karibe/workspace_kepler/Nokia1616_lcd/Generated_Code/CS.h</PathName>
+      <PathName>/home/karibe/workspace_kepler/Nokia1616_lcd/Generated_Code/Cpu.h</PathName>
+      <PathName>/home/karibe/workspace_kepler/Nokia1616_lcd/Generated_Code/IO_Map.h</PathName>
+      <PathName>/home/karibe/workspace_kepler/Nokia1616_lcd/Generated_Code/MOSI.h</PathName>
+      <PathName>/home/karibe/workspace_kepler/Nokia1616_lcd/Generated_Code/PE_Const.h</PathName>
+      <PathName>/home/karibe/workspace_kepler/Nokia1616_lcd/Generated_Code/PE_Error.h</PathName>
+      <PathName>/home/karibe/workspace_kepler/Nokia1616_lcd/Generated_Code/PE_LDD.h</PathName>
+      <PathName>/home/karibe/workspace_kepler/Nokia1616_lcd/Generated_Code/PE_Types.h</PathName>
+      <PathName>/home/karibe/workspace_kepler/Nokia1616_lcd/Generated_Code/RESET.h</PathName>
+      <PathName>/home/karibe/workspace_kepler/Nokia1616_lcd/Generated_Code/SCK.h</PathName>
+      <PathName>/home/karibe/workspace_kepler/Nokia1616_lcd/Generated_Code/UTIL1.h</PathName>
+      <PathName>/home/karibe/workspace_kepler/Nokia1616_lcd/Generated_Code/WAIT1.h</PathName>
+      <PathName>/home/karibe/workspace_kepler/Nokia1616_lcd/Sources/1616_lcd.h</PathName>
+      <PathName>/home/karibe/workspace_kepler/Nokia1616_lcd/Sources/Events.h</PathName>
+      <PathName>/home/karibe/workspace_kepler/Nokia1616_lcd/Sources/colors.h</PathName>
+      <PathName>/home/karibe/workspace_kepler/Nokia1616_lcd/Sources/font.h</PathName>
     </GeneratedHs>
     <GeneratedASMs>
-      <PathName>/home/simlab/src/git/freescale/Nokia1616_lcd/Project_Settings/Startup_Code/startup.S</PathName>
+      <PathName>/home/karibe/workspace_kepler/Nokia1616_lcd/Project_Settings/Startup_Code/startup.S</PathName>
     </GeneratedASMs>
   </FILES>
   <OPTIONS>

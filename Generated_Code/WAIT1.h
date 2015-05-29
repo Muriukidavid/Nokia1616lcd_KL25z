@@ -4,9 +4,9 @@
 **     Project     : ProcessorExpert
 **     Processor   : MKL25Z128VLK4
 **     Component   : Wait
-**     Version     : Component 01.064, Driver 01.00, CPU db: 3.00.000
+**     Version     : Component 01.067, Driver 01.00, CPU db: 3.00.000
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2014-07-28, 18:31, # CodeGen: 4
+**     Date/Time   : 2015-03-25, 16:40, # CodeGen: 4
 **     Abstract    :
 **          Implements busy waiting routines.
 **     Settings    :
@@ -18,15 +18,15 @@
 **     Contents    :
 **         Wait10Cycles   - void WAIT1_Wait10Cycles(void);
 **         Wait100Cycles  - void WAIT1_Wait100Cycles(void);
-**         WaitCycles     - void WAIT1_WaitCycles(word cycles);
-**         WaitLongCycles - void WAIT1_WaitLongCycles(dword cycles);
-**         Waitms         - void WAIT1_Waitms(word ms);
-**         Waitus         - void WAIT1_Waitus(word us);
-**         Waitns         - void WAIT1_Waitns(word ns);
+**         WaitCycles     - void WAIT1_WaitCycles(uint16_t cycles);
+**         WaitLongCycles - void WAIT1_WaitLongCycles(uint32_t cycles);
+**         Waitms         - void WAIT1_Waitms(uint16_t ms);
+**         Waitus         - void WAIT1_Waitus(uint16_t us);
+**         Waitns         - void WAIT1_Waitns(uint16_t ns);
 **         WaitOSms       - void WAIT1_WaitOSms(void);
 **
 **     License   : Open Source (LGPL)
-**     Copyright : Erich Styger, 2013, all rights reserved.
+**     Copyright : Erich Styger, 2013-2014, all rights reserved.
 **     Web       : www.mcuoneclipse.com
 **     This an open source software implementing waiting routines using Processor Expert.
 **     This is a free software and is opened for education,  research  and commercial developments under license policy of following terms:
@@ -72,7 +72,7 @@ extern "C" {
 #define WAIT1_WAIT_C(cycles) \
      ( (cycles)<=10 ? \
           WAIT1_Wait10Cycles() \
-        : WAIT1_WaitCycles((word)cycles) \
+        : WAIT1_WaitCycles((uint16_t)cycles) \
       )                                      /*!< wait for some cycles */
 
 
@@ -98,7 +98,7 @@ void WAIT1_Wait100Cycles(void);
 ** ===================================================================
 */
 
-void WAIT1_WaitCycles(word cycles);
+void WAIT1_WaitCycles(uint16_t cycles);
 /*
 ** ===================================================================
 **     Method      :  WAIT1_WaitCycles (component Wait)
@@ -111,7 +111,7 @@ void WAIT1_WaitCycles(word cycles);
 ** ===================================================================
 */
 
-void WAIT1_Waitms(word ms);
+void WAIT1_Waitms(uint16_t ms);
 /*
 ** ===================================================================
 **     Method      :  WAIT1_Waitms (component Wait)
@@ -129,7 +129,7 @@ void WAIT1_Waitms(word ms);
 #define WAIT1_Waitus(us)  \
        (  ((WAIT1_NofCyclesUs((us),CPU_BUS_CLK_HZ)==0)||(us)==0) ? \
           (void)0 : \
-          ( ((us)/1000)==0 ? (void)0 : WAIT1_Waitms((word)((us)/1000))) \
+          ( ((us)/1000)==0 ? (void)0 : WAIT1_Waitms((uint16_t)((us)/1000))) \
           , (WAIT1_NofCyclesUs(((us)%1000), CPU_BUS_CLK_HZ)==0) ? (void)0 : \
             WAIT1_WAIT_C(WAIT1_NofCyclesUs(((us)%1000), CPU_BUS_CLK_HZ)) \
        )
@@ -184,7 +184,7 @@ void WAIT1_Waitms(word ms);
 }  /* extern "C" */
 #endif
 
-void WAIT1_WaitLongCycles(dword cycles);
+void WAIT1_WaitLongCycles(uint32_t cycles);
 /*
 ** ===================================================================
 **     Method      :  WAIT1_WaitLongCycles (component Wait)

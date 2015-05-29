@@ -26,7 +26,7 @@
       <File Name="Generated_Code/PE_Error.h" FileDate="2014-07-28, 18:31:42" FileAge="1406561502000" FileType="45637" />
       <File Name="Generated_Code/BitIoLdd3.c" FileDate="2014-07-28, 18:31:42" FileAge="1406561502000" FileType="45637" CompNumb="11" />
       <File Name="Generated_Code/MOSI.c" FileDate="2014-07-28, 18:31:42" FileAge="1406561502000" FileType="45637" CompNumb="10" />
-      <File Name="Documentation/ProcessorExpert_SIGNALS.txt" FileDate="2014-07-31, 16:29:01" FileAge="1406813341000" FileType="3072" />
+      <File Name="Documentation/ProcessorExpert_SIGNALS.txt" FileDate="2014-08-04, 15:22:18" FileAge="1407154938000" FileType="3072" />
       <File Name="Documentation/doxygen/pex.doxyfile" FileDate="2014-07-28, 18:31:42" FileAge="1406561502000" FileType="45637" CompNumb="2" />
       <File Name="Documentation/doxygen/ProcessorExpert.txt" FileDate="2014-07-26, 00:23:08" FileAge="1406323388000" FileType="45637" CompNumb="2" />
       <File Name="Generated_Code/SCK.h" FileDate="2014-07-28, 18:31:42" FileAge="1406561502000" FileType="45637" CompNumb="12" />
@@ -35,9 +35,9 @@
       <File Name="Generated_Code/BitIoLdd2.h" FileDate="2014-07-28, 18:31:42" FileAge="1406561502000" FileType="45637" CompNumb="9" />
       <File Name="Generated_Code/CS.h" FileDate="2014-07-28, 18:31:42" FileAge="1406561502000" FileType="45637" CompNumb="8" />
       <File Name="Generated_Code/SCK.c" FileDate="2014-07-28, 18:31:42" FileAge="1406561502000" FileType="45637" CompNumb="12" />
-      <File Name="Generated_Code/CS.c" FileDate="2014-07-28, 18:31:42" FileAge="1406561502000" FileType="45637" CompNumb="8" />
-      <File Name="Generated_Code/RESET.h" FileDate="2014-07-28, 18:31:42" FileAge="1406561502000" FileType="45637" CompNumb="6" />
       <File Name="Generated_Code/BitIoLdd2.c" FileDate="2014-07-28, 18:31:42" FileAge="1406561502000" FileType="45637" CompNumb="9" />
+      <File Name="Generated_Code/RESET.h" FileDate="2014-07-28, 18:31:42" FileAge="1406561502000" FileType="45637" CompNumb="6" />
+      <File Name="Generated_Code/CS.c" FileDate="2014-07-28, 18:31:42" FileAge="1406561502000" FileType="45637" CompNumb="8" />
       <File Name="Generated_Code/RESET.c" FileDate="2014-07-28, 18:31:42" FileAge="1406561502000" FileType="45637" CompNumb="6" />
       <File Name="Generated_Code/BitIoLdd1.h" FileDate="2014-07-28, 18:31:42" FileAge="1406561502000" FileType="45637" CompNumb="7" />
       <File Name="Documentation/doxygen/BitIoLdd1.txt" FileDate="2014-07-26, 00:23:08" FileAge="1406323388000" FileType="45637" CompNumb="7" />
@@ -48,5 +48,5 @@
       <File Name="Sources/Events.h" FileDate="2014-07-26, 00:23:08" FileAge="1406323388000" FileType="131328" />
     </GeneratedByPE>
   </GeneratedFilesList>
-  <CodeGenReference>6</CodeGenReference>
+  <CodeGenReference>7</CodeGenReference>
 </CodeGenerationInfo>

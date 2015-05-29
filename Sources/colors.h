@@ -14,6 +14,7 @@ typedef struct{
   byte b;
 } Color;
 
+//static Color clr;
 Color White = {255,255,255};
 Color Black = {0,0,0};
 Color Red = {255,0,0};
