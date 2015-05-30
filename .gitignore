@@ -65,6 +65,10 @@ Linux_C_Debug/
 Debug/
 Nokia1616_lcd Linux_C_Debug.launch
 
+#the Processor Expert Documentation folder
+Documentation
+
+#others
 .gitignore~
 .project
 .cwGeneratedFileSetLog
