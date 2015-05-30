@@ -69,6 +69,8 @@ Nokia1616_lcd Linux_C_Debug.launch
 Documentation
 
 #others
-.gitignore~
+*~
+.*~
+.gitignore
 .project
 .cwGeneratedFileSetLog
