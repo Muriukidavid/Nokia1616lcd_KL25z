@@ -12,6 +12,26 @@
 #include "font.h"
 #include "colors.h"
 
+//Display parameters
+//display inversion Control: whether to invert line(=0) or frame(=1)
+#define NVCTR	0XB4
+#define NVCTR_NLA		(1 << 2)//display inversion in normal full color mode: 0=line 1=frame
+#define NVCTR_NLB		(1 << 1)//in idle mode
+#define NVCTR_NLC		(1 << 0)//in full colours partial mode
+
+//MADCTR: Memory AdDress ConTrolleR
+#define MADCTR 		0x36		// MADCTR command code
+#define MADCTR_RGB 	(1 << 3) 	// RGB-BGR order bit: ‘0’ =RGB color filter panel, ‘1’ =BGR color filter panel)
+#define MADCTR_ML 	(1 << 4) 	// Vertical refresh order:LCD vertical refresh direction control,
+								// ‘0’ = LCD vertical refresh Top to Bottom,
+								// ‘1’ = LCD vertical refresh Bottom to Top
+								//					----
+#define MADCTR_MV 	(1 << 5)	// Row/Column Exchange	|
+#define MADCTR_MX 	(1 << 6)	// Column Address Order	|--> Controls MCU to memory write/read direction.
+#define MADCTR_MY 	(1 << 7)	// Row Address Order	|		Used to change screen orientation
+								//					----
+
+
 //colormode and background color
 enum colormodes {twelve=0,sixteen,eighteen};
 #define COLORMODE sixteen //16 bit color-mode, 1 pixel 2 bytes
@@ -49,8 +69,29 @@ void add2display(unsigned char *str, int offset);
 void display(void);
 void resetBuffer(void);
 void select();
+void lcd_setOrientation(uint8_t or);
 
 //functions implementations
+void lcd_setOrientation(uint8_t or){
+	uint8_t setting = 0;
+	switch(or){
+		case 90: //90 degrees
+			setting = MADCTR_MV | MADCTR_MX;
+		break;
+		case 0: // 0 degrees: normal
+			setting = 0;
+		break;
+		case 180: //180 degrees
+			setting = MADCTR_MY | MADCTR_MX;
+		break;
+		case 270: //270 degrees rotation
+			setting = MADCTR_MV | MADCTR_MY | MADCTR_MX;
+		break;
+	}
+	lcd_sendcmd(MADCTR);
+	lcd_senddata(setting);
+}
+
 void select(int y){
 	lcd_setwin(0,y,width,8);
 	int i;

@@ -62,6 +62,7 @@ enum logics{false, true};
 
   /* Write your code here */
   lcd_init(Background);
+  lcd_setOrientation(90);
   add2display((unsigned char *)"University of Nairobi",0);
   add2display((unsigned char *)" Physics Department  ",0);
   add2display((unsigned char *)" another string for  ",0);
