@@ -48,32 +48,43 @@
 #include "IO_Map.h"
 
 /* User includes (#include below this line is not maintained by Processor Expert) */
-#include"1616_lcd.h"
+#include "main.h"
 /*lint -save  -e970 Disable MISRA rule (6.3) checking. */
 int main(void)
 /*lint -restore Enable MISRA rule (6.3) checking. */
 {
   /* Write your local variable definition here */
 enum logics{false, true};
-
+uint16_t rotation = 0;
   /*** Processor Expert internal initialization. DON'T REMOVE THIS CODE!!! ***/
   PE_low_level_init();
   /*** End of Processor Expert internal initialization.                    ***/
 
   /* Write your code here */
   lcd_init(Background);
-  lcd_setOrientation(90);
+
   add2display((unsigned char *)"University of Nairobi",0);
   add2display((unsigned char *)" Physics Department  ",0);
   add2display((unsigned char *)" another string for  ",0);
   add2display((unsigned char *)" another string menu ",0);
   selected=0;
   while(1){
+	  if(rotation>3)
+		  rotation = 0;
 	  if(selected>3)
 		  selected=0;
+	  lcd_setOrientation(rotation);
+	  lcd_clear(Background);
 	  display();
+	  //lcd_invert(rotation);
+	  lcd_fillrect(10,50,40,60, blue);
+	  lcd_drawrect(10,50,40,60, red);
+	  lcd_drawline(11,51,39,59, green);
+	  lcd_drawcircle(30, 100,10, red);
+	  lcd_fillcircle(30, 100,10, crimson);
 	  WAIT1_Waitms(1000);
 	  selected++;
+	  rotation++;
   }
 
   /*** Don't write any code pass this line, or it will be deleted during code generation. ***/
