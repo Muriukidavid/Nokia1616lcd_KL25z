@@ -77,4 +77,5 @@ void lcd_drawcircle(int x0, int y0, int r, Color color);
 void lcd_fillcircle(int x0, int y0, int r, Color clr);
 void lcd_fillcircleold(int x0, int y0, int r, Color clr);
 void lcd_fillcirclehelper(int x0, int y0, int r, uint8_t cornername,  int16_t delta, Color color);
+void lcd_showImage(uint8_t x, uint8_t y, uint8_t w, uint8_t h, RGB imgData[]);
 #endif /* 1616_LCD_H_ */

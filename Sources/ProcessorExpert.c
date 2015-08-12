@@ -56,6 +56,7 @@ int main(void)
   /* Write your local variable definition here */
 enum logics{false, true};
 uint16_t rotation = 0;
+extern RGB batt_icon[252];
   /*** Processor Expert internal initialization. DON'T REMOVE THIS CODE!!! ***/
   PE_low_level_init();
   /*** End of Processor Expert internal initialization.                    ***/
@@ -68,6 +69,8 @@ uint16_t rotation = 0;
   add2display((unsigned char *)" another string for  ",0);
   add2display((unsigned char *)" another string menu ",0);
   selected=0;
+  lcd_showImage(width-1-21,1,21,12,batt_icon);
+  WAIT1_Waitms(10000);
   while(1){
 	  if(rotation>3)
 		  rotation = 0;
