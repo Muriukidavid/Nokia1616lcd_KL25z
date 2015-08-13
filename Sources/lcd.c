@@ -4,12 +4,10 @@
  *  Created on: Jun 22, 2015
  *      Author: karibe
  */
-#include <math.h>
 #include "PE_Types.h"
 #include "PE_LDD.h"
 #include "1616_lcd.h"
 #include "font.h"
-//static Color clr;
 
 uint8_t blanks[cols] = "                     "; //blank row for clearing buffer
 uint8_t buffer[rows][cols]={}; //a buffer for display
@@ -42,45 +40,14 @@ uint16_t batt16[252]={
 63488,65535,65535,65535,65535,63488,63488,65535,63488,63488,65535,63488,63488,65535,63488,63488,65535,63488,63488,65535,63488,
 63488,63488,63488,63488,65535,63488,63488,65535,63488,63488,65535,63488,63488,65535,63488,63488,65535,63488,63488,65535,63488,
 65535,65535,65535,63488,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,63488,
-65535,65535,65535,63488,63488,63488,63488,63488,63488,63488,63488,63488
+65535,65535,65535,63488,63488,63488,63488,63488,63488,63488,63488,63488,63488,63488,63488,63488,63488,63488,63488,63488,63488
 };
-
-int abs(int x); //a stab for abs math function
-
 
 //drawing
 void lcd_drawpixel(int x, int y, Color clr){
 	lcd_setwin(x,y,x,y);
 	lcd_sendpixel(clr);
 }
-
-/*
- void lcd_drawline(int x0, int y0, int x1, int y1, Color clr) {
-	int dx, dy;
-	if(x1>x0)
-		dx=x1-x0;
-	else
-		dx = x0-x1;
-	int sx = x0<x1 ? 1 : -1;
-	//int dx = abs(x1-x0),
-	if(y1>y0)
-		dy = y1-y0;
-	else
-		dy=y0-y1;
-	int sy = y0<y1 ? 1 : -1;
-	//int dy = abs(y1-y0),
-	int err = (dx>dy ? dx : -dy)/2, e2;
-
-
-	for(;;){
-		lcd_drawpixel(x0,y0,clr);
-		if (x0==x1 && y0==y1) break;
-		e2 = err;
-		if (e2 >-dx) { err -= dy; x0 += sx; }
-		if (e2 < dy) { err += dx; y0 += sy; }
-	}
-}*/
-
 
 void lcd_drawline(int x0, int y0, int x1, int y1, Color clr) {
 	int dx = abs(x1-x0), sx = x0<x1 ? 1 : -1;
@@ -594,6 +561,5 @@ void lcd_showImage2(uint8_t x, uint8_t y, uint8_t w, uint8_t h, uint16_t imgData
 		i+=1;
 	}
 }
-
 
 
